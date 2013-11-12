@@ -12,5 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require lib/handlebars
+//= require lib/ember
+//= require lib/ember-data
 
+
+window.Todos = Ember.Application.create();
+
+Todos.Router.map(function () {
+    this.resource('todos', { path: '/' });
+});
