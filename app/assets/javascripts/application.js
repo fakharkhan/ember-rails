@@ -1,11 +1,9 @@
 window.Todos = Ember.Application.create();
 
-DS.RESTAdapter.reopen({
-    namespace: "api/v1"
-});
-
 Todos.Store = DS.Store.extend({
-    adapter: DS.RESTAdapter.create()
+    adapter: DS.RESTAdapter.create({
+        namespace: "api/v1"
+    })
 });
 
 
