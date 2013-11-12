@@ -1,73 +1,10 @@
+
 window.Todos = Ember.Application.create();
 
-Todos.ApplicationAdapter = DS.FixtureAdapter.extend();
-
-
-Todos.Router.map(function () {
-    this.resource('todos', { path: '/' }, function () {
-        // additional child routes
-        this.route('active');
-        this.route('completed');
-    });
+Todos.ApplicationAdapter = DS.LSAdapter.extend({
+    namespace: 'ember-rails'
 });
 
-
-Todos.Todo = DS.Model.extend({
-    title: DS.attr('string'),
-    isCompleted: DS.attr('boolean')
-});
-
-Todos.Todo.FIXTURES = [
-    {
-        id: 1,
-        title: 'Learn Ember.js',
-        isCompleted: true
-    },
-    {
-        id: 2,
-        title: '...',
-        isCompleted: false
-    },
-    {
-        id: 3,
-        title: 'Profit!',
-        isCompleted: false
-    }
-];
-
-Todos.TodosRoute = Ember.Route.extend({
-    model: function () {
-        return this.store.find('todo');
-    }
-});
-
-Todos.TodosIndexRoute = Ember.Route.extend({
-    model: function () {
-        return this.modelFor('todos');
-    }
-});
-
-Todos.TodosActiveRoute = Ember.Route.extend({
-    model: function(){
-        return this.store.filter('todo', function (todo) {
-            return !todo.get('isCompleted');
-        });
-    },
-    renderTemplate: function(controller){
-        this.render('todos/index', {controller: controller});
-    }
-});
-
-Todos.TodosCompletedRoute = Ember.Route.extend({
-    model: function(){
-        return this.store.filter('todo', function (todo) {
-            return todo.get('isCompleted');
-        });
-    },
-    renderTemplate: function(controller){
-        this.render('todos/index', {controller: controller});
-    }
-});
 
 Todos.TodosController = Ember.ArrayController.extend({
     actions: {
@@ -167,4 +104,6 @@ Todos.EditTodoView = Ember.TextField.extend({
 });
 
 Ember.Handlebars.helper('edit-todo', Todos.EditTodoView);
+
+
 

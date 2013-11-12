@@ -15,4 +15,4 @@
 //= require lib/handlebars
 //= require lib/ember
 //= require lib/ember-data
-//= require application
+//= require lib/local_storage_adapter
