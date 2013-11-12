@@ -1,3 +1,9 @@
+Todos.Todo = DS.Model.extend({
+    title: DS.attr('string'),
+    isCompleted: DS.attr('boolean')
+});
+
+
 Todos.Router.map(function () {
     this.resource('todos', { path: '/' }, function () {
         // additional child routes
@@ -6,12 +12,13 @@ Todos.Router.map(function () {
     });
 });
 
-
-Todos.Todo = DS.Model.extend({
-    title: DS.attr('string'),
-    isCompleted: DS.attr('boolean')
+Todos.TodosIndexRoute = Ember.Route.extend({
+    model: function () {
+        return this.modelFor('todos');
+        // var store = this.get('store');
+        // return store.findAll('todo');
+    }
 });
-
 
 
 Todos.TodosRoute = Ember.Route.extend({
@@ -20,11 +27,6 @@ Todos.TodosRoute = Ember.Route.extend({
     }
 });
 
-Todos.TodosIndexRoute = Ember.Route.extend({
-    model: function () {
-        return this.modelFor('todos');
-    }
-});
 
 Todos.TodosActiveRoute = Ember.Route.extend({
     model: function(){

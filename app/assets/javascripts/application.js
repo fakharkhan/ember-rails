@@ -1,8 +1,11 @@
-
 window.Todos = Ember.Application.create();
 
-Todos.ApplicationAdapter = DS.LSAdapter.extend({
-    namespace: 'ember-rails'
+DS.RESTAdapter.reopen({
+    namespace: "api/v1"
+});
+
+Todos.Store = DS.Store.extend({
+    adapter: DS.RESTAdapter.create()
 });
 
 
